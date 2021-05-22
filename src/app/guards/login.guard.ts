@@ -3,6 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from 
 import {Observable} from 'rxjs';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../environments/environment';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log('Running LoginGuard');
 
+    localStorage.setItem('codeVerifier', '');
+
     // This should be random text.
-    const codeVerifier = 'hello';
+    const codeVerifier = Guid.create().toString();
+    localStorage.setItem('codeVerifier', codeVerifier);
     let codeChallenge = CryptoJS.SHA256(codeVerifier).toString(CryptoJS.enc.Base64);
     codeChallenge = codeChallenge
       .replace(/=/g, '')

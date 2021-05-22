@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 export class CallbackComponent implements OnInit {
 
   code = '';
+  res: any = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
   }
@@ -20,18 +21,20 @@ export class CallbackComponent implements OnInit {
       this.code = params.code;
     });
     console.log(`code = ${this.code}`);
+    console.log(`codeVerifier = ${localStorage.getItem('codeVerifier')}`);
 
     const payload = new HttpParams()
       .set('client_id', environment.clientId)
       .set('grant_type', 'authorization_code')
       .set('code', this.code)
       .set('redirect_uri', environment.redirectUrl)
-      .set('code_verifier', 'hello')
+      .set('code_verifier', localStorage.getItem('codeVerifier') || '')
       .set('scope', environment.scope);
 
     this.http.post(`https://login.microsoftonline.com/${environment.tenantId}/oauth2/v2.0/token`, payload)
       .subscribe(res => {
         console.log(res);
+        this.res = res;
       });
   }
 
