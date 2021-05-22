@@ -2,7 +2,7 @@
 
 Authorization Code with PKCE sample with Azure AD
 
-Azure AD Application name : AzSampleApp
+Azure AD Application name : AzSampleSpaApp
 
 ## Installation
 
