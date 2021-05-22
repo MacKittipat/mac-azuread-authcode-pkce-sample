@@ -19,6 +19,10 @@ $ ng serve
 ## App URL 
 http://localhost:4200/
 
+## Register app to Azure AD
+![](azad-register-app.PNG "")
+Under Redirect URI, Select SPA and enter http://localhost:4200/callback in textbox.
+
 ## Reference 
 * https://blogs.aaddevsup.xyz/2020/08/performing-azure-ad-oauth2-authorization-code-grant-flow-with-pkce-in-postman/
 * https://niceprogrammer.com/angular-8-oauth-2-authorization-code-flow-with-pkce/
